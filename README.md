@@ -50,6 +50,7 @@ This is a (likely incomplete) list of the variables, conditionals, and loops ava
   + [Error Page Variables](#error-page-variables)
   + [Error Page Conditionals](#error-page-conditionals)
   + [Error Page Loops](#error-page-loops)
+- [Functions](#functions)
 - [Other Useful Links](#other-useful-links)
 
 
@@ -562,6 +563,29 @@ This page contains no conditionals.
 This page contains no loops.
 
 [Back to Top](#comicfury-template-engine-documentation)
+
+## Functions
+
+Sometimes it is useful to slightly transform the value of a variable before you put it on the page. For that, ComicFury has some helpful functions.
+
+Functions can be used on any of the above variables, including loop variables, at any time.
+
+### Math functions
+These functions all expect two numbers, which can be variables.
+
+- `[f:add|a|b]` - adds up A and B (example: `[f:add|3|2]` will output `5`).
+- `[f:subtract|a|b]` – subtracts B from A (example: `[f:subtract|3|2]` will output `1`).
+- `[f:multiply|a|b]` – multiples A and B (example: `[f:multiply|3|2]` will output `6`).
+- `[f:divide|a|b]` divides A by B (example: `[f:multiply|3|2]` will output `1.5`).
+- `[f:randomnumber|a|b]` chooses a random number between A and B inclusive (example: `[f:randomnumber|3|2]` could output `2` or `3`). The output will be picked randomly every time the page loads, so you should use this sparingly as it reduces the performance of ComicFury and your webcomic.
+
+### Text functions
+Normally when ComicFury outputs a variable, it replace any apostrophes with the HTML entity `&#039;` and any quotation marks with the HTML entity `&quot;`. This means it is always safe to output a variable directly into HTML without breaking your site. (For example, `<div class="[v:custom.value]">` will always be valid HTML, even if `[v:custom.value]` contains quotation marks.) Note that this doesn't apply to literal text passed to a function.
+
+These functions all modify that default behaviour and control how a variable is output.
+
+- `[f:js|v:text]` will output the variable `[v:text]` and replace more characters that aren't letters or numbers (so apostrophes, quotation marks, brackets, emojis, for example) with JavaScript escape sequences, surrounded by quoutation marks. The result is always a string that will be valid in `<script>` tags.
+- `[f:rawhtml|v:text]` will output the variable `[v:text]` without escaping the apostrophes and quotation marks.
 
 ## Other Useful Links
 
