@@ -586,6 +586,9 @@ These functions all modify that default behaviour and control how a variable is 
 
 - `[f:js|v:text]` will output the variable `[v:text]` and replace more characters that aren't letters or numbers (so apostrophes, quotation marks, brackets, emojis, for example) with JavaScript escape sequences, surrounded by quoutation marks. The result is always a string that will be valid in `<script>` tags.
 - `[f:rawhtml|v:text]` will output the variable `[v:text]` without escaping the apostrophes and quotation marks.
+- `[f:removehtmltags|v:text]` will output the variable `[v:text]` and remove all of the HTML tags. Tags that contain human-readable text (such as `<b>` for bold text) will be replaced with just their text. Tags that contain code (such as `<script>` or `<style>` tags) will be completely removed.
+  + So `[f:removehtmltags|<b>bold text</b>]` becomes just `bold text` (that isn't bold!).
+  + And `[f:removehtmltags|cool <script>alert("Hello!");</script> text]` becomes just `cool  text`.
 
 ## Other Useful Links
 
